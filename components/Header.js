@@ -1,16 +1,20 @@
 import { React, useState, useEffect } from "react";
-import Image from "next/image";
-import { BrowserView, MobileView } from "react-device-detect";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRangePicker } from "react-date-range";
 
 import {
   GlobeAltIcon,
   MenuIcon,
   SearchIcon,
   UserCircleIcon,
+  UsersIcon,
 } from "@heroicons/react/solid";
 import { Tab, Tabs, Paper } from "@material-ui/core";
+import { Button } from "@chakra-ui/react";
 export default function Header() {
   const [value, setValue] = useState(2);
+  const [searchInput, setSearchInput] = useState("");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -20,6 +24,21 @@ export default function Header() {
     text: "white",
   });
   const [search, setSearch] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [noOfGuests, setNoOfGuests] = useState(1);
+  const handleSelect = (ranges) => {
+    setStartDate(ranges.selection.startDate);
+    setEndDate(ranges.selection.endDate);
+  };
+ const resetInput =()=>{
+   setSearchInput("")
+ }
+  const selectionRange = {
+    startDate: startDate,
+    endDate: endDate,
+    key: "selection",
+  };
   if (process.browser) {
     const changeBackGround = () => {
       console.log(window.scrollY);
@@ -70,6 +89,8 @@ export default function Header() {
       {search ? (
         <div className="flex items-center md:border-2 rounded-full py-2 md-shadow-sm">
           <input
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
             type="text"
             placeholder="Start your search"
             className="flex-grow pl-4   bg-transparent  outline-none placeholder-gray-900 "
@@ -78,10 +99,24 @@ export default function Header() {
         </div>
       ) : (
         <div className="text-white font-semibold ">
-          <Tabs value={value} TabIndicatorProps={{style: {background:'white'}}} onChange={handleChange} className="bg-transparent items-center">
-            <Tab label="Places to stay" className="hover:scale-105 transform transition duration-200 ease-out" />
-            <Tab label="Experiences" className="hover:scale-105 transform transition duration-200 ease-out" />
-            <Tab label="Online Experiences" className="hover:scale-105 transform transition duration-200 ease-out" />
+          <Tabs
+            value={value}
+            TabIndicatorProps={{ style: { background: "white" } }}
+            onChange={handleChange}
+            className="bg-transparent items-center"
+          >
+            <Tab
+              label="Places to stay"
+              className="hover:scale-105 transform transition duration-200 ease-out"
+            />
+            <Tab
+              label="Experiences"
+              className="hover:scale-105 transform transition duration-200 ease-out"
+            />
+            <Tab
+              label="Online Experiences"
+              className="hover:scale-105 transform transition duration-200 ease-out"
+            />
           </Tabs>
         </div>
       )}
@@ -97,6 +132,32 @@ export default function Header() {
           <UserCircleIcon className="h-10 text-gray-700" />
         </div>
       </div>
+      {searchInput && search && (
+        <div className="flex flex-col col-span-3 mx-auto">
+          <DateRangePicker
+            ranges={[selectionRange]}
+            minDate={new Date()}
+            rangeColors={["#FD5B61"]}
+            onChange={handleSelect}
+          />
+          <div className="flex items-center border-b mb-4">
+            <h2 className="text-2xl flex-grow font-semibold ">
+              Number of guests
+            </h2>
+            <UsersIcon className="h-5" />
+            <input
+              values={noOfGuests}
+              onChange={(e) => setNoOfGuests(e.target.values)}
+              type="number"
+              className="w-12 pl-2 text-lg outline-none text-red-400"
+            />
+          </div>
+          <div className="flex">
+            <Button className="flex-grow text-gray-500" onClick={resetInput}>Cancel</Button>
+            <Button className="flex-grow text-red-400">Search</Button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
