@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Header from "../components/Header";
+import Header from "../components/HeaderHome";
 import Banner from "../components/Banner";
 import SmallCard from "../components/SmallCard";
 import MediumCard from "../components/MediumCard";
