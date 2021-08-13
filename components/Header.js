@@ -52,10 +52,10 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 flex flex-row justify-between bg-${color.header} transition p-5 md:px-10 sm:w-[1480px] md:w-[1480px] lg:w-[1480px] w-[600px] bg-white`}
+      className={`sticky top-0 bottom-6 z-50 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-3  justify-between bg-${color.header} transition px-5 md:px-10 my-4`}
     >
       {/* First part*/}
-      <div className="relative flex items-center h-10 cursor-pointer my-auto m-10  ">
+      <div className="hidden md:relative md:flex items-center h-10 cursor-pointer my-auto m-10 ">
         <svg
           width="102"
           height="32"
@@ -68,17 +68,17 @@ export default function Header() {
       {/* Second part */}
 
       {search ? (
-        <div className="flex items-center md:border-2 rounded-full py-2 md-shadow-sm bg-white">
+        <div className="flex items-center md:border-2 rounded-full py-2 md-shadow-sm">
           <input
             type="text"
             placeholder="Start your search"
-            className="flex-grow pl-4   bg-transparent  outline-none placeholder-gray-900 w-[400px]"
+            className="flex-grow pl-4   bg-transparent  outline-none placeholder-gray-900 "
           />
           <SearchIcon className="md:inline-flex h-8 bg-red-400 text-white rounded-full md:p-2 cursor-pointer" />
         </div>
       ) : (
-        <div className="flex items-center py-2 text-white font-semibold ">
-          <Tabs value={value} TabIndicatorProps={{style: {background:'white'}}} onChange={handleChange}>
+        <div className="text-white font-semibold ">
+          <Tabs value={value} TabIndicatorProps={{style: {background:'white'}}} onChange={handleChange} className="bg-transparent items-center">
             <Tab label="Places to stay" className="hover:scale-105 transform transition duration-200 ease-out" />
             <Tab label="Experiences" className="hover:scale-105 transform transition duration-200 ease-out" />
             <Tab label="Online Experiences" className="hover:scale-105 transform transition duration-200 ease-out" />
