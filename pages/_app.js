@@ -17,7 +17,8 @@ Router.events.on('routeChangeError',progress.finish);
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
-  <Component {...pageProps} /></ChakraProvider>)
+  <Component {...pageProps} />
+  </ChakraProvider>)
 }
 
 export default MyApp

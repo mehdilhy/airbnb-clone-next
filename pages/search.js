@@ -1,10 +1,12 @@
-import React from "react";
+import {React,useState} from "react";
 import Header from "../components/HeaderDefault";
 import Footer from "../components/Footer";
 import { useRouter } from "next/dist/client/router";
 import { format } from "date-fns";
 import Image from "next/image";
 import InfoCard from "../components/InfoCard";
+import Map from "../components/Map";
+import { Button } from "@chakra-ui/button";
 
 function Search({searchResults}) {
   const router = useRouter();
@@ -12,10 +14,13 @@ function Search({searchResults}) {
   const formatedStartDate = format(new Date(startDate), "dd MMMM yy");
   const formatedEndDate = format(new Date(endDate), "dd MMMM yy");
   const range = `${formatedStartDate} - ${formatedEndDate}`;
+  const [mapState,setMapState]=useState("hidden")
 
   return (
     <div>
       <Header placeholder={`${location} | ${range} | ${noOfGuests}`}/>
+      <Button onClick={()=>setMapState("")}>Show Map</Button>
+      <Button onClick={()=>setMapState("hidden")}>Hide Map</Button>
       <main className="flex">
         <section className="flex-grow pt-14 px-6">
           {noOfGuests == 1 ? (
@@ -50,6 +55,9 @@ function Search({searchResults}) {
               total={total}
               />
           ))}</div>
+        </section>
+        <section className={`${mapState} lg:inline-flex lg:min-w-[600px]`}>
+          <Map searchResults={searchResults}/>
         </section>
       </main>
       <Footer />
