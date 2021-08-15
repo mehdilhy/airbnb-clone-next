@@ -1,20 +1,18 @@
 import { Button } from "@chakra-ui/react";
+import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import React from "react";
 
 export default function Banner() {
+  const router =useRouter()
   return (
-    <div className="relative h-[500px] sm:h-[600px] md:h-[400px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px] bottom-[100px] sm:bottom-[150px] overflow-x-hidden">
-      <Image
-        src="https://a0.muscache.com/im/pictures/57b9f708-bb12-498c-bc33-769f8fc43e63.jpg?im_w=2560"
-        layout="fill"
-        objectFit="cover"
-      />
-      <div className="absolute top-1/2 w-full text-center">
+    <div className="relative h-[500px] overflow-x-hidden">
+
+      <div className="absolute top-[40%] w-full text-center">
         <p className="font-semibold text-lg sm:text-lg">
           Not sure where to go? Perfect.
         </p>
-        <button className=" bg-white rounded-full px-10 py-4 shadow-md hover:shadow-sm active:scale-90 transition duration-150 my-4">
+        <button className=" bg-white rounded-full px-10 py-4 shadow-md hover:shadow-sm active:scale-90 transition duration-150 my-4" onClick={()=>router.push("/search?location=lo&startDate=2021-08-24T23%3A00%3A00.000Z&endDate=2021-08-28T23%3A00%3A00.000Z&noOfGuests=1")}>
           <text className="font-bold text-transparent  bg-clip-text bg-gradient-to-r from-purple-800 to-pink-600">
             I'm flexible
           </text>

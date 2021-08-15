@@ -2,6 +2,9 @@ import { React, useState, useEffect } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
+import PropTypes from "prop-types";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
 import {
   GlobeAltIcon,
@@ -10,12 +13,14 @@ import {
   UserCircleIcon,
   UsersIcon,
 } from "@heroicons/react/solid";
-import { Tab, Tabs, Paper } from "@material-ui/core";
+import { Tab, Tabs, Paper, TabPanel } from "@material-ui/core";
 import { Button } from "@chakra-ui/react";
 import { useRouter } from "next/dist/client/router";
+import SearchbarTab from "./SearchbarTab";
+import SearchbarTabExperience from "./SearchbarTabExperience";
 export default function HeaderHome() {
   const router = useRouter();
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -25,6 +30,31 @@ export default function HeaderHome() {
     logo: "white",
     text: "white",
   });
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+  };
   const [search, setSearch] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -46,8 +76,8 @@ export default function HeaderHome() {
       pathname: "/search",
       query: {
         location: searchInput,
-        startDate:startDate.toISOString(),
-        endDate:endDate.toISOString(),
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
         noOfGuests,
       },
     });
@@ -85,10 +115,10 @@ export default function HeaderHome() {
 
   return (
     <header
-      className={`sticky top-0 bottom-6 z-50 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-3  justify-between bg-${color.header} transition px-5 md:px-10 my-4`}
+      className={`sticky top-0  z-50 flex flex-row  justify-between bg-${color.header} transition px-6 md:px-10 py-4`}
     >
       {/* First part*/}
-      <div className="hidden md:relative md:flex items-center h-10 cursor-pointer my-auto m-10 ">
+      <div className="hidden md:relative md:flex items-center h-10 cursor-pointer mx-10 my-1">
         <svg
           width="102"
           height="32"
@@ -107,47 +137,67 @@ export default function HeaderHome() {
             onChange={(e) => setSearchInput(e.target.value)}
             type="text"
             placeholder="Start your search"
-            className="flex-grow pl-4   bg-transparent  outline-none placeholder-gray-900 "
+            className="flex-grow pl-4 bg-transparent  outline-none placeholder-gray-900 "
           />
           <SearchIcon className="md:inline-flex h-8 bg-red-400 text-white rounded-full md:p-2 cursor-pointer" />
         </div>
       ) : (
-        <div className="text-white font-semibold ">
+        <div className="text-white font-semibold flex flex-col items-center">
           <Tabs
             value={value}
             TabIndicatorProps={{ style: { background: "white" } }}
             onChange={handleChange}
-            className="bg-transparent items-center"
+            className="bg-transparent mx-3"
           >
             <Tab
               label="Places to stay"
               className="hover:scale-105 transform transition duration-200 ease-out"
-            />
+              style={{ textTransform: "none" }}
+            >
+              <h1>TEST</h1>
+            </Tab>
             <Tab
               label="Experiences"
               className="hover:scale-105 transform transition duration-200 ease-out"
+              style={{ textTransform: "none" }}
             />
             <Tab
               label="Online Experiences"
-              className="hover:scale-105 transform transition duration-200 ease-out"
-            />
+              className="hover:scale-105 transform transition duration-200 ease-out cursor-pointer"
+              style={{ textTransform: "none" }}
+              // onClick={() =>
+              //   router.push(
+              //     "/search?location=lo&startDate=2021-08-24T23%3A00%3A00.000Z&endDate=2021-08-28T23%3A00%3A00.000Z&noOfGuests=1"
+              //   )
+              // }
+            >
+              Online Experiences
+            </Tab>
           </Tabs>
+          <TabPanel value={value} index={0}>
+            <SearchbarTab />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+          <SearchbarTabExperience/>
+
+          </TabPanel>
         </div>
       )}
 
       {/* Third part  */}
+      {/* hidden md:relative md:flex items-center h-10 cursor-pointer mx-10 my-1 */}
       <div
-        className={`hidden md:flex items-center space-x-4 justify-end text-${color.text} font-semibold text-16`}
+        className={`hidden md:relative md:flex items-center h-10 space-x-4 justify-end text-${color.text} font-semibold text-16 `}
       >
         <p className="hidden md:inline">Become a host</p>
-        <GlobeAltIcon className="hidden md:h-6 " />
+        <GlobeAltIcon className="h-6 " />
         <div className="hidden md:flex items-center space-x-2 p-1 border-2 rounded-full bg-white">
           <MenuIcon className="h-6 text-gray-700" />
           <UserCircleIcon className="h-10 text-gray-700" />
         </div>
       </div>
       {searchInput && search && (
-        <div className="flex flex-col col-span-3 mx-auto">
+        <div className="flex flex-col col-span-3 ">
           <DateRangePicker
             ranges={[selectionRange]}
             minDate={new Date()}

@@ -5,7 +5,7 @@ import SmallCard from "../components/SmallCard";
 import MediumCard from "../components/MediumCard";
 import LargeCard from "../components/LargeCard";
 import Footer from "../components/Footer";
-
+import Image from "next/image"
 export default function Home({ exploreData,cardsData }) {
   return (
     <div className="">
@@ -13,8 +13,9 @@ export default function Home({ exploreData,cardsData }) {
         <title>Airbnb</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="bg-airbnb bg-no-repeat bg-cover bg-fixed">
       <Header />
-      <Banner />
+      <Banner /></div>
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
         <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">Explore nearby</h2>
