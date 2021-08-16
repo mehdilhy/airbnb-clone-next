@@ -6,17 +6,20 @@ import MediumCard from "../components/MediumCard";
 import LargeCard from "../components/LargeCard";
 import Footer from "../components/Footer";
 import Image from "next/image"
+import { Button } from "@chakra-ui/react";
+import useDarkMode from "../components/useDarkMode";
+
 export default function Home({ exploreData,cardsData }) {
   return (
-    <div className="">
+    <div className="dark:bg-gray-800 transition transform duration-500 ease-out">
       <Head>
         <title>Airbnb</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="bg-airbnb bg-no-repeat bg-cover bg-fixed">
+      <div className="bg-airbnb bg-local md:bg-fixed dark:bg-airbnb-night">
       <Header />
       <Banner /></div>
-      <main className="max-w-7xl mx-auto px-8 sm:px-16">
+      <main className="max-w-7xl mx-auto px-8 sm:px-16 dark:text-white">
         <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">Explore nearby</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

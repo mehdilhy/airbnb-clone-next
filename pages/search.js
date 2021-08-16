@@ -19,8 +19,7 @@ function Search({searchResults}) {
   return (
     <div>
       <Header placeholder={`${location} | ${range} | ${noOfGuests}`}/>
-      <Button onClick={()=>setMapState("")}>Show Map</Button>
-      <Button onClick={()=>setMapState("hidden")}>Hide Map</Button>
+
       <main className="flex">
         <section className="flex-grow pt-14 px-6">
           {noOfGuests == 1 ? (

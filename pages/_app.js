@@ -16,7 +16,7 @@ Router.events.on('routeChangeError',progress.finish);
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
+    <ChakraProvider className="dark">
   <Component {...pageProps} />
   </ChakraProvider>)
 }
