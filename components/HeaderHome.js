@@ -117,8 +117,8 @@ export default function HeaderHome() {
   }
 
   return (
-    <header
-      className={`top-0 z-50 flex flex-row  justify-between dark:bg-transparent transition px-6 md:px-10 py-4 dark:text-gray-200 `}
+    <div
+      className={`top-0 z-50 flex flex-row  justify-between dark:bg-transparent transition px-6 md:px-10 py-4 dark:text-gray-200`}
     >
       {/* First part*/}
       <div className="hidden md:relative md:flex items-center h-10 cursor-pointer mx-10 my-1 ">
@@ -167,6 +167,7 @@ export default function HeaderHome() {
       {/* Second part */}
 
       <div className="text-white font-semibold flex flex-col items-center dark:bg-transparent ">
+
         <Tabs
           value={value}
           TabIndicatorProps={{ style: { background: "white" } }}
@@ -248,6 +249,6 @@ export default function HeaderHome() {
           </div>
         </div>
       )}
-    </header>
+    </div>
   );
 }

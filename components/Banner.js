@@ -6,12 +6,12 @@ import React from "react";
 export default function Banner() {
   const router = useRouter();
   return (
-    <div className="relative h-[500px] overflow-x-hidden ">
+    <div className="relative h-[600px] w-[100%] overflow-x-hidden ">
       <Center>
-        <div className="  absolute top-[20%] text-center  w-[30%] rounded-xl">
+        <div className="absolute top-[20%] text-center  w-[30%] rounded-xl">
           <Center>
             <button
-              className="dark:text-gray-200   dark:bg-gray-800 bg-white rounded-xl px-10 py-4 shadow-md hover:shadow-sm active:scale-90 transition duration-150 my-4"
+              className="dark:text-gray-200   dark:bg-gray-800 bg-white rounded-xl px-10 py-4 shadow-md hover:shadow-sm active:scale-90 transition duration-150 my-4 fixed"
               onClick={() =>
                 router.push(
                   "/search?location=lo&startDate=2021-08-24T23%3A00%3A00.000Z&endDate=2021-08-28T23%3A00%3A00.000Z&noOfGuests=1"

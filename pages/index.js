@@ -17,7 +17,7 @@ export default function Home({ exploreData,cardsData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Flex className="bg-airbnb bg-cover bg-center dark:bg-airbnb-night h-[700px]" justify="center" flexDir="column">
-      <Header className="w-inherit"/>
+      <Header/>
       <Banner /></Flex>
       <main className="max-w-7xl mx-auto px-8 sm:px-16 dark:text-white">
         <section className="pt-6">
